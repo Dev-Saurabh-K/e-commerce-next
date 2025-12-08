@@ -1,3 +1,5 @@
+"use client"
+
 import Items from "./Items";
 import Items1 from "./Items1";
 import Items2 from "./Items2";
@@ -5,10 +7,20 @@ import Items3 from "./Items3";
 import Items4 from "./Items4";
 import Footer from "./Footer";
 import AdCard from "./sub-components/AdCard";
+import Cart from "./Cart";
+import { useCounterStore } from "@/app/store";
+
 
 const MainBody = () => {
+  // const [cartPageState, setCartPageState]=useState(true);
+  const cartPageState=useCounterStore((state)=>state.cartPageState);
+  const setCartPageState=useCounterStore((store)=>store.setCartPageState);
   return (
+    
     <div className="w-full min-h-screen flex justify-center bg-gray-50">
+      {/* cart page */}
+      {cartPageState?<div className="h-screen lg:w-1/3 w-full bg-red-500 absolute right-0 z-50"><Cart setCartPageState={setCartPageState}/></div>:null}
+      
       {/* Main Container: Limits width and centers itself */}
       <div className="w-full max-w-7xl px-4 flex flex-col items-center gap-2 bg-amber-200 mt-[120px] pb-10">
         {/* Top Banner */}

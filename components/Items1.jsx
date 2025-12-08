@@ -1,20 +1,29 @@
-import ItemsCard from "./sub-components/ItemsCard"
+import ItemsCard from "./sub-components/ItemsCard";
 
 const Items1 = () => {
   return (
     <div className="w-full h-[350px] bg-amber-300 flex flex-col gap-5 mt-5">
-        <div className="itemCat1 flex mt-auto"><p className="text-2xl font-bold flex bg-fuchsia-400">Dairy, Bread & Eggs</p><p className="text-blue-500 ml-auto flex justify-center items-center">see all</p></div>
-        <div className="items flex flex-row bg-amber-500 w-full h-[80%] justify-center items-center gap-4">
-            <div className="bg-blue-100 h-[90%] rounded-sm w-2/12 flex justify-center items-center">
-            <ItemsCard/>
-            </div>
-            <div className="bg-blue-200 h-[90%] rounded-sm w-2/12 flex justify-center items-center"></div>
-            <div className="bg-blue-300 h-[90%] rounded-sm w-2/12 flex justify-center items-center"></div>
-            <div className="bg-blue-400 h-[90%] rounded-sm w-2/12 flex justify-center items-center"></div>
-            <div className="bg-blue-500 h-[90%] rounded-sm w-2/12 flex justify-center items-center"></div>
+      <div className="itemCat1 flex mt-auto">
+        <p className="text-2xl font-bold flex bg-fuchsia-400">
+          Dairy, Bread & Eggs
+        </p>
+        <p className="text-blue-500 ml-auto flex justify-center items-center">
+          see all
+        </p>
+      </div>
+      <div className="items flex flex-row bg-amber-500 w-full h-[80%] justify-center items-center gap-4">
+        <div className="bg-blue-100 h-[90%] rounded-sm w-2/12 flex justify-center items-center">
+          <ItemsCard />
         </div>
+        <div className="bg-blue-200 h-[90%] rounded-sm w-2/12 flex justify-center items-center">
+          <ItemsCard />
+        </div>
+        <div className="bg-blue-300 h-[90%] rounded-sm w-2/12 flex justify-center items-center"></div>
+        <div className="bg-blue-400 h-[90%] rounded-sm w-2/12 flex justify-center items-center"></div>
+        <div className="bg-blue-500 h-[90%] rounded-sm w-2/12 flex justify-center items-center"></div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Items1
+export default Items1;

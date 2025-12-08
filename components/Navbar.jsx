@@ -1,21 +1,16 @@
 "use client";
 
+import { useCounterStore } from "@/app/store";
 import "./css/navbar.css";
 import { Search, ShoppingCart, MapPin } from "lucide-react"; // Added MapPin for location
 import CartButton from "./sub-components/CartButton";
-import { useState } from "react";
+
 
 const Navbar = () => {
-  // Renamed for clarity. 'item' is vague.
-  const [isCartActive, setIsCartActive] = useState(false);
-
-  const toggleCartState = () => {
-    setIsCartActive(!isCartActive);
-  };
+  const cart=useCounterStore((state)=>state.isCartActive);
 
   return (
-    // Changed w-screen to w-full to prevent horizontal scrollbars
-    // Removed fixed + margin approach in favor of sticky top-0 for better flow
+
     <nav className="navbar flex flex-row justify-between items-center px-6 py-4 h-[85px] border-b border-gray-200 sticky top-0 z-30 bg-amber-50 w-full shadow-sm">
       
       {/* 1. Logo Section */}
@@ -55,11 +50,11 @@ const Navbar = () => {
         </button>
 
         {/* Cart Trigger */}
-        <div onClick={toggleCartState}>
-          {isCartActive ? (
+        <div>
+          {cart ? (
             <CartButton />
           ) : (
-            <button className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 transition-colors font-bold text-gray-700 px-6 py-3 rounded-lg gap-2">
+            <button className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 transition-colors font-bold text-gray-700 px-6 py-3 w-[135px] h-[55px] rounded-lg gap-2">
               <ShoppingCart size={20} />
               <span>My Cart</span>
             </button>
