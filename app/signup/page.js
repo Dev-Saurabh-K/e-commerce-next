@@ -1,22 +1,23 @@
 "use client";
-
+import axios from "axios";
 import { useState } from "react";
+
 const Page = () => {
-  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
-
-    const data = await res.json();
-    console.log(data);
+    try {
+      const res = await axios.post("/api/auth/signup", form);
+      console.log(res.data);
+    } catch (err) {
+      console.log(err.response?.data || err.message);
+    }
   };
 
   return (
@@ -24,15 +25,18 @@ const Page = () => {
       <form onSubmit={handleSubmit}>
         <input
           placeholder="username"
+          value={form.username}
           onChange={(e) => setForm({ ...form, username: e.target.value })}
         />
         <input
           placeholder="email"
+          value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
         <input
           placeholder="password"
           type="password"
+          value={form.password}
           onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
 

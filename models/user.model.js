@@ -16,7 +16,7 @@ const UserSchema=new mongoose.Schema({
     }
 })
 
-const User=mongoose.model.User || mongoose.model("User", UserSchema);
+const User=mongoose.models.User || mongoose.model("User", UserSchema);
 
 //just for testing without caching--
 // const User=mongoose.model("User", UserSchema);
