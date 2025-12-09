@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-const page = () => {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+const Page = () => {
+  const [form, setForm] = useState({ username: "", email: "", password: "" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("api/auth/signup", {
+    const res = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,8 +23,8 @@ const page = () => {
     <div className="w-full h-full">
       <form onSubmit={handleSubmit}>
         <input
-          placeholder="name"
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          placeholder="username"
+          onChange={(e) => setForm({ ...form, username: e.target.value })}
         />
         <input
           placeholder="email"
@@ -42,4 +42,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
