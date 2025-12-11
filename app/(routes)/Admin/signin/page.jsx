@@ -14,9 +14,9 @@ const page = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("/api/auth/login", form);
+      const res = await axios.post("/api/auth/admin/signin", form);
       console.log(res.data);
-    } catch (error) {
+    } catch (error){
       console.log(error.response?.data||error.message);
     }
   };

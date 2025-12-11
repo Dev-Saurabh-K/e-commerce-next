@@ -1,22 +1,17 @@
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/configs/db";
-import User from "@/models/user.model";
+import Admin from "@/models/admin.model";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
 
 export async function POST(request) {
   try {
     const { email, password } = await request.json();
     await connectToDatabase();
 
-    //find existing user
     try {
-      const user = await User.findOne({ email });
-      if (user) {
-        console.log(user);
-        console.log(user.password);
-      } else {
+      const admin = await Admin.findOne({ email });
+      if (!admin) {
         return NextResponse.json(
           {
             message: "Unregistered",
@@ -26,13 +21,14 @@ export async function POST(request) {
           }
         );
       }
-      //checks pass
-      const isMatched = await bcrypt.compare(password, user.password);
+
+      const isMatched = await bcrypt.compare(password, admin.password);
       if (isMatched) {
         const payload = {
-          id: user._id,
-          email: user.email,
+          id: admin._id,
+          email: admin.email,
         };
+
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
           expiresIn: "7d",
         });
@@ -46,16 +42,15 @@ export async function POST(request) {
           }
         );
         try {
-          response.cookies.set("authToken", token, {
+          response.cookies.set("adminAuthToken", token, {
             httpOnly: true, // Recommended for security
             secure: process.env.NODE_ENV === "production", // Use HTTPS in production
             maxAge: 60 * 60 * 24 * 7, // 1 week in seconds
             path: "/",
           });
-        } catch (err) {
-          console.log("cookie setting error", err);
+        } catch (error) {
+          console.log("cookie setting error", error);
         }
-
         return response;
       } else {
         return NextResponse.json(
@@ -67,13 +62,13 @@ export async function POST(request) {
           }
         );
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   } catch (error) {
     return NextResponse.json(
       {
-        message: "internal server error",
+        message: "Internal server error",
       },
       {
         status: 500,

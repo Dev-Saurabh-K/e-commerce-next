@@ -19,3 +19,20 @@ authToken:jwtTokenPayload{
     _id,
     email,
 }
+
+
+| Field           | Meaning                       |
+| --------------- | ----------------------------- |
+| `name`          | Product title                 |
+| `description`   | Full product info             |
+| `images`        | Multiple images array         |
+| `category`      | Product category              |
+| `brand`         | Manufacturer or brand name    |
+| `price`         | Original price                |
+| `discountPrice` | Sale price                    |
+| `stock`         | Available items               |
+| `rating`        | Average rating from users     |
+| `reviews[]`     | User-based reviews            |
+| `variants[]`    | Extra details like size/color |
+| `tags[]`        | Searchable keywords           |
+| `isFeatured`    | To highlight products         |
