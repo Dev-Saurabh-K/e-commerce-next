@@ -1,9 +1,6 @@
-export const runtime = "nodejs";
-
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/configs/db";
 import Product from "@/models/product.model";
-import jwt from "jsonwebtoken";
 
 export async function POST(request) {
   try {
@@ -24,7 +21,7 @@ export async function POST(request) {
       isFeatured,
     } = await request.json();
     await connectToDatabase();
-    
+
     //create product
     const createdProduct = new Product({
       email,
@@ -42,7 +39,7 @@ export async function POST(request) {
       variants,
       isFeatured,
     });
-    
+
     // console.log("add");
     await createdProduct.save();
 
@@ -59,7 +56,7 @@ export async function POST(request) {
       {
         message: "Internal Server Error",
       },
-      {status:500}
+      { status: 500 }
     );
   }
 }
@@ -80,3 +77,6 @@ export async function POST(request) {
 
 //   return NextResponse.json({ message: "Token received", token: tokenValue});
 // }
+
+
+
