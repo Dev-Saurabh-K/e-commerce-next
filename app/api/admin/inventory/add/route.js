@@ -24,7 +24,7 @@ export async function POST(request) {
       isFeatured,
     } = await request.json();
     await connectToDatabase();
-
+    
     //create product
     const createdProduct = new Product({
       email,
@@ -42,7 +42,8 @@ export async function POST(request) {
       variants,
       isFeatured,
     });
-
+    
+    // console.log("add");
     await createdProduct.save();
 
     return NextResponse.json(
